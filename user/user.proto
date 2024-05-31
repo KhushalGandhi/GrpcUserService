@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package user;
+
+option go_package = "github.com/yourusername/UserService/user";
+
+message User {
+  int32 id = 1;
+  string fname = 2;
+  string city = 3;
+  int64 phone = 4;
+  float height = 5;
+  bool Married = 6;
+}
+
+message UserIDRequest {
+  int32 id = 1;
+}
+
+message UserResponse {
+  User user = 1;
+}
+
+message UserIDsRequest {
+  repeated int32 ids = 1;
+}
+
+message UsersResponse {
+  repeated User users = 1;
+}
+
+service UserService {
+  rpc GetUserByID (UserIDRequest) returns (UserResponse);
+  rpc GetUsersByID (UserIDsRequest) returns (UsersResponse);
+  rpc SearchUsers (User) returns (UsersResponse); // Adjust according to your search criteria
+}
